@@ -54,7 +54,7 @@ if uploaded_file:
     
     # Fungsi Formatting Angka Format Indonesia (titik untuk ribuan)
     def format_indo(angka):
-        return f"{int(angka):,}").replace(",", ".")
+        return f"{int(angka):,}".replace(",", ".")
 
     format_dict = {metric: format_indo for metric in metrics}
     
