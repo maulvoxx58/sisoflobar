@@ -16,8 +16,10 @@ if uploaded_file:
     # 2. Mengambil tabel lookup untuk Identitas Nama DSE (Kolom AT ke AV / 'MC', 'ID', 'Nama')
     lookup = df_raw[['ID', 'Nama']].dropna(subset=['ID']).drop_duplicates()
     
+    # HAPUS kolom lookup dari data utama agar tidak bentrok (Menghindari error KeyError)
+    df = df_raw.drop(columns=['MC', 'ID', 'Nama'], errors='ignore')
+    
     # Menggabungkan data utama dengan lookup berdasarkan dse_code dan ID
-    df = df_raw.copy()
     df = df.merge(lookup, left_on='dse_code', right_on='ID', how='left')
     
     # Jika nama tidak ditemukan, gunakan kode dse-nya saja
